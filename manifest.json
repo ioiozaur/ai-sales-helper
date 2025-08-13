@@ -4,6 +4,7 @@
   "version": "1.0",
   "description": "Generate conversation insights from a name and company",
   "permissions": ["storage", "scripting", "activeTab"],
+  "host_permissions": ["https://www.linkedin.com/in/*"],
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
@@ -12,8 +13,14 @@
       "128": "images/icon128.png"
     }
   },
+  "content_scripts": [
+    {
+      "matches": ["*://www.linkedin.com/in/*"],
+      "js": ["linkedin-content.js"],
+      "run_at": "document_idle"
+    }
+  ],
   "background": {
     "service_worker": "background.js"
-  },
-  "host_permissions": ["<all_urls>"]
+  }
 }
